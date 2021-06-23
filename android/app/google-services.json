@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001907965007",
+    "project_id": "catalogoluah",
+    "storage_bucket": "catalogoluah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001907965007:android:1354f032a3999f4fc0ee3a",
+        "android_client_info": {
+          "package_name": "br.com.wellyssonrochadev.com.example.catalogoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001907965007-c5uobr04v4n02cq45ii0o37abjg4s32f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwUAfCLNc4sohlpFq5WDO5bczCCK7IStk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001907965007-c5uobr04v4n02cq45ii0o37abjg4s32f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
