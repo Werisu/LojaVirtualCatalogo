@@ -1,5 +1,8 @@
 import 'package:catalogoapp/helpers/validators.dart';
+import 'package:catalogoapp/models/user.dart';
+import 'package:catalogoapp/models/user_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -96,7 +99,12 @@ class LoginScreen extends StatelessWidget {
                     style: raisedButtonStyle,
                     onPressed: (){
                       if(formKey.currentState!.validate()){
-                        
+                        context.read<UserManager>().signIn(
+                          UserData(
+                              email: emailController.text,
+                              password: passController.text
+                          )
+                        );
                       }
                     },
                     child: const Text(
