@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
 
     // definindo uma chave global
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     // pegando valores dos campos de email e senha
     final TextEditingController emailController = TextEditingController();
@@ -41,6 +42,7 @@ class LoginScreen extends StatelessWidget {
     );
 
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: const Text("Entrar"),
         centerTitle: true,
@@ -100,10 +102,22 @@ class LoginScreen extends StatelessWidget {
                     onPressed: (){
                       if(formKey.currentState!.validate()){
                         context.read<UserManager>().signIn(
-                          UserData(
+                          user: UserData(
                               email: emailController.text,
                               password: passController.text
-                          )
+                          ),
+                          onFail: (e){
+                            // info: 'showSnackBar' is deprecated and shouldn't be used. Use ScaffoldMessenger.showSnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(e),
+                                backgroundColor: Colors.red[900],
+                              )
+                            );
+                          },
+                          onSuccess: (){
+                            // TODO: FECHAR TELA DE LOGIN
+                          }
                         );
                       }
                     },
