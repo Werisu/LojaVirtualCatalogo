@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
       title: 'Catálogo Vitual',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color.fromARGB(255, 59, 44, 33),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 59, 44, 33),
+        appBarTheme: const AppBarTheme(
+          elevation: 0
+        )
       ),
       home: BaseScreen(),
     );
