@@ -6,11 +6,12 @@ para UserData.
  */
 class UserData{
 
-  UserData({required this.email, required this.password});
+  UserData({this.email = "", this.password = "", this.nome = ""});
 
-  late String email;
-  late String password;
-
+  String nome;
+  String email;
+  String password;
+  String confirmPassword = "";
 
 
 }

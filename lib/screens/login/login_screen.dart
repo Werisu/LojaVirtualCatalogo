@@ -1,6 +1,7 @@
 import 'package:catalogoapp/helpers/validators.dart';
 import 'package:catalogoapp/models/user.dart';
 import 'package:catalogoapp/models/user_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +19,8 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passController = TextEditingController();
 
-
-
     // 'RaisedButton' está obsoleto e não deve ser usado. Em vez disso, use ElevatedButton. Consulte o guia de migração em flutter.dev/go/material-button-migration-guide).
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
       primary: Theme.of(context).primaryColor,
       onSurface: Theme.of(context).primaryColor,
@@ -46,6 +45,19 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Entrar"),
         centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed('/signup');
+            },
+            child: Text("CRIAR CONTA"),
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              textStyle: TextStyle(fontSize: 14)
+            ),
+          )
+        ],
       ),
       body: Center(
         child: Card(
