@@ -1,6 +1,9 @@
 import 'package:catalogoapp/helpers/validators.dart';
 import 'package:catalogoapp/models/user.dart';
+import 'package:catalogoapp/models/user_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -51,6 +54,13 @@ class SignUpScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            FirebaseAuth.instance.signOut();
+          },
+          icon: Icon(Icons.logout)
+          )
+        ],
         /*leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -149,7 +159,21 @@ class SignUpScreen extends StatelessWidget {
                           return;
                         }
 
-                        //usermanager
+                        context.read<UserManager>().signUp(
+                            user: user,
+                            onFail: (e){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(e),
+                                    backgroundColor: Colors.red[900],
+                                  )
+                              );
+                            },
+                            onSuccess: (){
+                              print("suecsso");
+                              // TODO: POP
+                            }
+                        );
                       }
                     },
                     child: Text("Criar Conta"),
