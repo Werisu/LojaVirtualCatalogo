@@ -1,8 +1,10 @@
 import 'package:catalogoapp/helpers/firebase_erros.dart';
 import 'package:catalogoapp/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
+/// classe para gerenciar usuários
 class UserManager extends ChangeNotifier{
 
   UserManager(){
@@ -10,6 +12,8 @@ class UserManager extends ChangeNotifier{
   }
   
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   late final User user;
 
   bool _loading = false;
@@ -64,9 +68,12 @@ class UserManager extends ChangeNotifier{
 
   void _loadCurrentUser() async{
     final User? currentUser = FirebaseAuth.instance.currentUser;
+    /// se usuário for diferente de nulo
     if(currentUser != null){
-      user = currentUser;
-      print("uid: "+user.uid);
+      /// acessando a coleção users, pegando o uid do usuário que está logado no momento
+      /// e dando um get para obter p documento
+      final DocumentSnapshot docUser = await firestore.collection('users').doc(currentUser.uid).get();
+
     }
     notifyListeners();
   }

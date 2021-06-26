@@ -10,10 +10,20 @@ class UserData{
 
   UserData({this.email = "", this.password = "", this.name = "", this.id = ""});
 
-  String id;
-  String name;
-  String email;
-  String password;
+  UserData.fromDocument(DocumentSnapshot document){
+
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+    // id = document.documentID;
+    id = document.id;
+    name = data['name'];
+    email = data['email'];
+  }
+
+  String id = "";
+  String name = "";
+  String email = "";
+  String password = "";
   String confirmPassword = "";
 
   // sempre que quiser acessar a referencia do usuário pode usar o firestoreRef
