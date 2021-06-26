@@ -88,8 +88,8 @@ class UserManager extends ChangeNotifier{
 
       /// obter os dados do usuário logado
       user = UserData.fromDocument(docUser);
-      print(user.name);
-      print(user);
+      //print(user.name);
+      //print(user);
       notifyListeners();
     }
   }
