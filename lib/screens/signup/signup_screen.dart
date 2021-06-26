@@ -3,6 +3,7 @@ import 'package:catalogoapp/models/user.dart';
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -93,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
                       return null;
                     }
                   },
-                  onSaved: (name)=>user.nome = name!,
+                  onSaved: (name)=>user.name = name!,
                 ),
                 SizedBox(height: 16,),
                 TextFormField(
@@ -170,7 +171,9 @@ class SignUpScreen extends StatelessWidget {
                               );
                             },
                             onSuccess: (){
-                              print("suecsso");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("content"), backgroundColor: Colors.blue,)
+                              );
                               // TODO: POP
                             }
                         );
