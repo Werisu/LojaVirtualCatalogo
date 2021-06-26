@@ -38,13 +38,26 @@ class CustomDrawerHeader extends StatelessWidget {
                 onTap: (){
                   //FirebaseAuth.instance.signOut();
                   if(userManager.isLoggedIn){
-                    FirebaseAuth.instance.signOut();
+                    userManager.signOut();
+                    Navigator.of(context).pushNamed('/home');
+                    /// snackbar personalizada
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Você deslogou do app"),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      )
+                    );
                   }else{
                     Navigator.of(context).pushNamed('/login');
                   }
                 },
                 child: Text(
-                  userManager.isLoggedIn ? "Sair" : "Entre ou cadastre-se",
+                  userManager.isLoggedIn
+                      ? "Sair"
+                      : "Entre ou cadastre-se",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,

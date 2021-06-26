@@ -174,7 +174,7 @@ class SignUpScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("content"), backgroundColor: Colors.blue,)
                               );
-                              // TODO: POP
+                              Navigator.of(context).pop();
                             }
                         );
                       }

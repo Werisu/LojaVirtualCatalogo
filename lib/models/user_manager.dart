@@ -21,7 +21,7 @@ class UserManager extends ChangeNotifier{
   bool _loading = false;
   bool get loading => _loading;
 
-  bool get isLoggedIn => user != null;
+  bool get isLoggedIn => user.name != "";
   
   Future<void> signIn({
     required UserData user,
@@ -89,7 +89,14 @@ class UserManager extends ChangeNotifier{
       /// obter os dados do usuário logado
       user = UserData.fromDocument(docUser);
       print(user.name);
+      print(user);
       notifyListeners();
     }
+  }
+
+  void signOut() {
+    auth.signOut();
+    user = UserData();
+    notifyListeners();
   }
 }
