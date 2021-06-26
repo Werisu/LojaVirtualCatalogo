@@ -20,6 +20,8 @@ class UserManager extends ChangeNotifier{
 
   bool _loading = false;
   bool get loading => _loading;
+
+  bool get isLoggedIn => user != null;
   
   Future<void> signIn({
     required UserData user,

@@ -1,6 +1,5 @@
 import 'package:catalogoapp/common/custom_drawer/custom_drawer.dart';
 import 'package:catalogoapp/models/page_manager.dart';
-import 'package:catalogoapp/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,23 +16,28 @@ class BaseScreen extends StatelessWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          LoginScreen(),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
-              title: const Text("Luah's"),
+              title: const Text("Home"),
             ),
           ),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
-              title: const Text("Luah's"),
+              title: const Text("Produtos"),
             ),
           ),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
-              title: const Text("Luah's"),
+              title: const Text("Meus Pedidos"),
+            ),
+          ),
+          Scaffold(
+            drawer: CustomDrawer(),
+            appBar: AppBar(
+              title: const Text("Lojas"),
             ),
           ),
         ],

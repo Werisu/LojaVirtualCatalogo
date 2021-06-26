@@ -1,5 +1,6 @@
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:catalogoapp/screens/base/base_screen.dart';
+import 'package:catalogoapp/screens/login/login_screen.dart';
 import 'package:catalogoapp/screens/signup/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,10 @@ class MyApp extends StatelessWidget {
             case '/base':
               return MaterialPageRoute(
                 builder: (_)=>BaseScreen(),
+              );
+            case '/login':
+              return MaterialPageRoute(
+                builder: (_)=>LoginScreen(),
               );
             case '/signup':
               return MaterialPageRoute(
