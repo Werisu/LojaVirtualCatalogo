@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           create: (_)=>UserManager(),
           lazy: false,
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (_)=>ProductManager(),
           lazy: false,
         )
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         title: 'Catálogo Vitual',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 59, 44, 33),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 59, 44, 33),
+          primaryColor: const Color.fromARGB(255,184,134,11),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 184,134,11),
           appBarTheme: const AppBarTheme(
             elevation: 0
           )
