@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SearchDialog extends StatelessWidget {
-  const SearchDialog({Key? key}) : super(key: key);
+  const SearchDialog(this.initialText);
+
+  final String initialText;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class SearchDialog extends StatelessWidget {
           right: 4,
           child: Card(
             child: TextFormField(
+              initialValue: initialText,
               textInputAction: TextInputAction.search,
               autofocus: true,
               decoration: InputDecoration(
@@ -22,7 +25,7 @@ class SearchDialog extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_rounded),
                   color: Colors.grey[800],
                   onPressed: (){
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                   },
                 ),
               ),
