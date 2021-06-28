@@ -1,3 +1,4 @@
+import 'package:catalogoapp/models/product-manager.dart';
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:catalogoapp/screens/base/base_screen.dart';
 import 'package:catalogoapp/screens/login/login_screen.dart';
@@ -17,9 +18,17 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserManager(),
-      lazy: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_)=>UserManager(),
+          lazy: false,
+        ),
+        Provider(
+          create: (_)=>ProductManager(),
+          lazy: false,
+        )
+      ],
       child: MaterialApp(
         title: 'Catálogo Vitual',
         debugShowCheckedModeBanner: false,
