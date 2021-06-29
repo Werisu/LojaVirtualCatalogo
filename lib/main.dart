@@ -1,7 +1,9 @@
 import 'package:catalogoapp/models/product-manager.dart';
+import 'package:catalogoapp/models/product.dart';
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:catalogoapp/screens/base/base_screen.dart';
 import 'package:catalogoapp/screens/login/login_screen.dart';
+import 'package:catalogoapp/screens/product/product_screen.dart';
 import 'package:catalogoapp/screens/signup/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,12 @@ class MyApp extends StatelessWidget {
             case '/signup':
               return MaterialPageRoute(
                 builder: (_)=>SignUpScreen(),
+              );
+            case '/product':
+              return MaterialPageRoute(
+                builder: (_)=>ProductScreen(
+                  settings.arguments as Product
+                )
               );
             default:
               return MaterialPageRoute(
