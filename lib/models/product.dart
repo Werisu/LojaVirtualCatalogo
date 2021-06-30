@@ -1,7 +1,8 @@
 import 'package:catalogoapp/models/item_size.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
-class Product {
+class Product extends ChangeNotifier {
 
   Product.fromDocument(DocumentSnapshot document){
     id = document.id;
@@ -9,14 +10,27 @@ class Product {
     description = document['description'] as String;
     images = List<String>.from(document.get('images') as List<dynamic>);
     isSizes(document);
-    print(sizes);
   }
 
   late String id;
   late String name;
   late String description;
   late List<String> images;
-  late List<ItemSize> sizes = [];
+  late List<ItemSize>? sizes = null;
+
+  late ItemSize? _selectSize = null;
+  ItemSize? get select{
+    try{
+      return _selectSize;
+    }catch (e){
+      print("Erro no product.dar -> get _selectSize $e");
+      return null;
+    }
+  }
+  set selectSize(ItemSize value) {
+    this._selectSize = value;
+    notifyListeners();
+  }
 
   void isSizes(DocumentSnapshot document){
     try{
@@ -25,7 +39,7 @@ class Product {
               (s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
 
     }catch(e){
-      print(e);
+
     }
   }
 

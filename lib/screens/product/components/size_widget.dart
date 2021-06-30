@@ -1,5 +1,7 @@
 import 'package:catalogoapp/models/item_size.dart';
+import 'package:catalogoapp/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SizeWidget extends StatelessWidget {
   const SizeWidget({required this.size});
@@ -8,35 +10,55 @@ class SizeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: !(size.stock > 0) ? Colors.red.withAlpha(50) : Colors.grey
-        )
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            color: !(size.stock > 0) ? Colors.red.withAlpha(50) : Colors.grey,
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-            child: Text(
-              size.name.toUpperCase(),
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              "R\$ ${size.price.toStringAsFixed(2)}",
-              style: TextStyle(
-                color: !(size.stock > 0) ? Colors.red.withAlpha(50) : Colors.grey
-              ),
-            ),
+
+    final product = context.watch<Product>();
+    final selected = size == product.select;
+
+    Color color;
+    if(!(size.stock > 0)){
+      color = Colors.red.withAlpha(50);
+    } else if(selected){
+      color = Theme.of(context).primaryColor;
+    } else {
+      color = Colors.grey;
+    }
+
+    return GestureDetector(
+      onTap: (){
+        if((size.stock > 0)){
+          product.selectSize = size;
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: color
           )
-        ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              color: color,
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text(
+                size.name.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "R\$ ${size.price.toStringAsFixed(2)}",
+                style: TextStyle(
+                  color: color
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
