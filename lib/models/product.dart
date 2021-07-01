@@ -39,8 +39,21 @@ class Product extends ChangeNotifier {
               (s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
 
     }catch(e){
-
+      sizes = [];
     }
+  }
+
+  int get totalStock{
+    int stock = 0;
+    for(final size in sizes!){
+      stock += size.stock;
+    }
+    print(stock);
+    return stock;
+  }
+
+  bool get hasStock{
+    return totalStock > 0;
   }
 
 }
