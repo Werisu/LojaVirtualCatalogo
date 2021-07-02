@@ -16,9 +16,9 @@ class Product extends ChangeNotifier {
   late String name;
   late String description;
   late List<String> images;
-  late List<ItemSize>? sizes = null;
+  late List<ItemSize>? sizes;
 
-  late ItemSize? _selectSize = null;
+  ItemSize? _selectSize;
   ItemSize? get select{
     try{
       return _selectSize;
@@ -54,6 +54,14 @@ class Product extends ChangeNotifier {
 
   bool get hasStock{
     return totalStock > 0;
+  }
+
+  ItemSize? findSize(String? name) {
+    try{
+      return sizes!.firstWhere((s) => s.name == name);
+    }catch(e){
+      return null;
+    }
   }
 
 }
