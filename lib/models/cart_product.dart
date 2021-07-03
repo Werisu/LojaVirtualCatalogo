@@ -50,4 +50,12 @@ class CartProduct{
     return product.id == productId && product.select!.name == size;
   }
 
+  void increment(){
+    quantity++;
+  }
+
+  void decrement(){
+    quantity--;
+  }
+
 }
