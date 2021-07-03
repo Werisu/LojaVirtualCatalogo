@@ -23,7 +23,7 @@ class CartProduct{
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   String? productId;
-  int? quantity;
+  late int quantity;
   String? size;
 
   Product? product;
@@ -36,6 +36,18 @@ class CartProduct{
   num get uniPrice {
     if(product == null) return 0;
     return itemSize!.price;
+  }
+
+  Map<String, dynamic> toCartItemMap(){
+    return{
+      'pid' : productId,
+      'quantity' : quantity,
+      'size' : size
+    };
+  }
+
+  bool stackable(Product product){
+    return product.id == productId && product.select!.name == size;
   }
 
 }

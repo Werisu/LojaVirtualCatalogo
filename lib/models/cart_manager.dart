@@ -20,13 +20,28 @@ class CartManager {
   }
 
   Future<void> _loadCartItems() async{
-    final QuerySnapshot cartSnap = await user!.cartReference.get();
 
-    items = cartSnap.docs.map((d) => CartProduct.fromDocument(d)).toList();
+    try{
+      final QuerySnapshot cartSnap = await user!.cartReference.get();
+
+      items = cartSnap.docs.map((d) => CartProduct.fromDocument(d)).toList();
+    }catch(e){
+      print("erro ao carregar itens");
+    }
+
+    print("carregando itens");
+
   }
 
   void addToCart(Product product){
-    items.add(CartProduct.fromProduct(product));
+    try {
+      final e = items.firstWhere((p) => p.stackable(product));
+      e.quantity++;
+    } catch (e) {
+      final cartProduct = CartProduct.fromProduct(product);
+      items.add(cartProduct);
+      user!.cartReference.add(cartProduct.toCartItemMap());
+    }
   }
 
 }
