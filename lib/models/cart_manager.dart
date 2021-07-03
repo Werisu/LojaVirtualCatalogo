@@ -24,7 +24,9 @@ class CartManager {
     try{
       final QuerySnapshot cartSnap = await user!.cartReference.get();
 
-      items = cartSnap.docs.map((d) => CartProduct.fromDocument(d)).toList();
+      items = cartSnap.docs.map(
+              (d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated)
+      ).toList();
     }catch(e){
       print("erro ao carregar itens");
     }
@@ -39,9 +41,14 @@ class CartManager {
       e.quantity++;
     } catch (e) {
       final cartProduct = CartProduct.fromProduct(product);
+      cartProduct.addListener(_onItemUpdated);
       items.add(cartProduct);
       user!.cartReference.add(cartProduct.toCartItemMap());
     }
+  }
+
+  void _onItemUpdated(){
+    print("==========> Atualizado");
   }
 
 }
