@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1001907965007:android:2d2a49b83a0e6951c0ee3a",
+        "mobilesdk_app_id": "1:1001907965007:android:1354f032a3999f4fc0ee3a",
         "android_client_info": {
-          "package_name": "com.example.catalogoapp"
+          "package_name": "br.com.wellyssonrochadev.com.example.catalogoapp"
         }
       },
       "oauth_client": [
