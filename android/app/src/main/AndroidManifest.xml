@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.wellyssonrochadev.catalogoapp">
+    package="com.example.catalogoapp">
    <application
         android:label="catalogoapp"
         android:icon="@mipmap/ic_launcher">

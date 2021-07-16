@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Catálogo Vitual',
+        title: 'Catálogo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Arial',
