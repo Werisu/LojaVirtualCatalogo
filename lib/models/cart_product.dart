@@ -24,7 +24,7 @@ class CartProduct extends ChangeNotifier{
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  late String id;
+  String? id;
 
   String? productId;
   late int quantity;
@@ -41,6 +41,8 @@ class CartProduct extends ChangeNotifier{
     if(product == null) return 0;
     return itemSize!.price;
   }
+
+  num get totalPrice => uniPrice * quantity;
 
   Map<String, dynamic> toCartItemMap(){
     return{
