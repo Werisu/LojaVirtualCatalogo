@@ -18,7 +18,10 @@ class CartProduct extends ChangeNotifier{
     size = document.get('size') as String;
 
     firestore.doc('products/$productId').get().then(
-            (doc) => product = Product.fromDocument(doc)
+            (doc){
+              product = Product.fromDocument(doc);
+              notifyListeners();
+            }
     );
   }
 
