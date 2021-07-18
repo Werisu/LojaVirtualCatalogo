@@ -10,9 +10,9 @@ class Section {
             (i) => SectionItem.fromMap(i as Map<String, dynamic>)).toList();
   }
 
-  String? name;
-  String? type;
-  List<SectionItem>? items;
+  late String name;
+  late String type;
+  late List<SectionItem> items;
 
   @override
   String toString() {
