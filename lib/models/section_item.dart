@@ -4,7 +4,7 @@ class SectionItem {
     image = map['image'] as String;
   }
 
-  String? image;
+  late String image;
 
   @override
   String toString() {
