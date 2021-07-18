@@ -1,6 +1,7 @@
 import 'package:catalogoapp/common/custom_drawer/custom_drawer.dart';
 import 'package:catalogoapp/models/home_manager.dart';
 import 'package:catalogoapp/screens/home/components/section_list.dart';
+import 'package:catalogoapp/screens/home/components/section_staggered.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         case 'List':
                           return SectionList(section);
                         case 'Staggered':
-                          return Container();
+                          return SectionStaggered(section);
                         default:
                           return Container();
                       }
