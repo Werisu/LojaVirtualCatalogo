@@ -1,3 +1,4 @@
+import 'package:catalogoapp/models/admin_users_manager.dart';
 import 'package:catalogoapp/models/cart_manager.dart';
 import 'package:catalogoapp/models/home_manager.dart';
 import 'package:catalogoapp/models/product-manager.dart';
@@ -43,6 +44,13 @@ class MyApp extends StatelessWidget {
           update: (_, userManager, cartManager) =>
           cartManager!..updateUser(userManager),
         ),
+        /// Esse ChangeNotifierProxyProvider é do tipo AdminUsersManager e está vinculado ao UserManager
+        ChangeNotifierProxyProvider<UserManager, AdminUsersManager>(
+          create: (_) => AdminUsersManager(),
+          lazy: true,
+          update: (_, userManager, adminUsersManager) =>
+          adminUsersManager!..updateUser(userManager),
+        )
       ],
       child: MaterialApp(
         title: 'Catálogo',

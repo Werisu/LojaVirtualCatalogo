@@ -1,6 +1,7 @@
 import 'package:catalogoapp/common/custom_drawer/custom_drawer.dart';
 import 'package:catalogoapp/models/page_manager.dart';
 import 'package:catalogoapp/models/user_manager.dart';
+import 'package:catalogoapp/screens/admin_users/admin_users_screen.dart';
 import 'package:catalogoapp/screens/home/home_screen.dart';
 import 'package:catalogoapp/screens/products/products_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class BaseScreen extends StatelessWidget {
               ),
               if(userManager.adminEnabled)
                 ...[
+                  AdminUsersScreen(),
                   Scaffold(
                     drawer: CustomDrawer(),
                     appBar: AppBar(
