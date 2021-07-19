@@ -6,6 +6,7 @@ import 'package:catalogoapp/models/product.dart';
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:catalogoapp/screens/base/base_screen.dart';
 import 'package:catalogoapp/screens/cart/cart_screen.dart';
+import 'package:catalogoapp/screens/edit_product/edit_product_screen.dart';
 import 'package:catalogoapp/screens/login/login_screen.dart';
 import 'package:catalogoapp/screens/product/product_screen.dart';
 import 'package:catalogoapp/screens/signup/signup_screen.dart';
@@ -87,6 +88,10 @@ class MyApp extends StatelessWidget {
             case '/cart':
               return MaterialPageRoute(
                   builder: (_)=>CartScreen()
+              );
+            case '/edit_product':
+              return MaterialPageRoute(
+                builder: (_) => EditProductScreen()
               );
             default:
               return MaterialPageRoute(
