@@ -1,3 +1,4 @@
+import 'package:catalogoapp/models/page_manager.dart';
 import 'package:catalogoapp/models/user_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,8 @@ class CustomDrawerHeader extends StatelessWidget {
                 onTap: (){
                   //FirebaseAuth.instance.signOut();
                   if(userManager.isLoggedIn){
+                    context.read<PageManager>().setPage(0); //Navigator.of(context).pushNamed('/home');
                     userManager.signOut();
-                    Navigator.of(context).pushNamed('/home');
                     /// snackbar personalizada
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
