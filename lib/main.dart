@@ -57,12 +57,12 @@ class MyApp extends StatelessWidget {
         title: 'Catálogo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: 'Arial',
+          fontFamily: 'QuickSand',
           primaryColor: const Color.fromARGB(255,184,134,11),
           scaffoldBackgroundColor: const Color.fromARGB(255, 184,134,11),
           appBarTheme: const AppBarTheme(
             elevation: 0
-          )
+          ),
         ),
         initialRoute: '/base',
         onGenerateRoute: (settings){
