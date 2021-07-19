@@ -31,10 +31,10 @@ class CartManager extends ChangeNotifier {
               (d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated)
       ).toList();
     }catch(e){
-      print("erro ao carregar itens");
+      //print("erro ao carregar itens");
     }
 
-    print("carregando itens");
+    //print("carregando itens");
 
   }
 
@@ -76,8 +76,6 @@ class CartManager extends ChangeNotifier {
     }
 
     notifyListeners();
-
-    print(productsPrice);
   }
 
   void _updateCartProduct(CartProduct cartProduct){

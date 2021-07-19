@@ -26,6 +26,8 @@ class UserData{
   String password = "";
   String confirmPassword = "";
 
+  bool admin = false;
+
   // sempre que quiser acessar a referencia do usuário pode usar o firestoreRef
   DocumentReference get firestoreRef => FirebaseFirestore.instance.doc('users/$id');
 

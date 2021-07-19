@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:catalogoapp/models/section.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class SectionHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
-        section.name,
+        StringUtils.capitalize(section.name),
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w800,

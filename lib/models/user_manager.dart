@@ -88,11 +88,17 @@ class UserManager extends ChangeNotifier{
 
       /// obter os dados do usuário logado
       user = UserData.fromDocument(docUser);
-      //print(user.name);
-      //print(user);
+
+      final docAdmin = await firestore.collection('admins').doc(currentUser.uid).get();
+      if(docAdmin.exists){
+        user.admin = true;
+      }
+
       notifyListeners();
     }
   }
+
+  bool get adminEnabled => user.name != "" && user.admin;
 
   void signOut() {
     auth.signOut();

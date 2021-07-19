@@ -48,7 +48,6 @@ class Product extends ChangeNotifier {
     for(final size in sizes!){
       stock += size.stock;
     }
-    print(stock);
     return stock;
   }
 
