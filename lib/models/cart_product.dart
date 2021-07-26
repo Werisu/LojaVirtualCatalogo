@@ -40,12 +40,12 @@ class CartProduct extends ChangeNotifier{
     return product!.findSize(size);
   }
 
-  num get uniPrice {
+  num? get uniPrice {
     if(product == null) return 0;
     return itemSize!.price;
   }
 
-  num get totalPrice => uniPrice * quantity;
+  num get totalPrice => uniPrice! * quantity;
 
   Map<String, dynamic> toCartItemMap(){
     return{
@@ -72,7 +72,7 @@ class CartProduct extends ChangeNotifier{
   bool get hasStock {
     final size = itemSize;
     if(size == null) return false;
-    return size.stock >= quantity;
+    return size.stock! >= quantity;
   }
 
 }

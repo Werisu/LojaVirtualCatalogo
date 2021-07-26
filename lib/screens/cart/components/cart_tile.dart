@@ -50,7 +50,7 @@ class CartTile extends StatelessWidget {
                         builder: (_, cartProdut, __){
                           if(cartProduct.hasStock)
                             return Text(
-                              "R\$ ${cartProduct.uniPrice.toStringAsFixed(2)}",
+                              "R\$ ${cartProduct.uniPrice!.toStringAsFixed(2)}",
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontSize: 16,

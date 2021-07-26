@@ -78,7 +78,7 @@ class EditProductScreen extends StatelessWidget {
                       'Descrição',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500
+                        fontWeight: FontWeight.bold
                       ),
                     ),
                   ),
@@ -89,7 +89,7 @@ class EditProductScreen extends StatelessWidget {
                     ),
                     decoration: const InputDecoration(
                         hintText: "Descrição",
-                        border: InputBorder.none
+                        border: InputBorder.none,
                     ),
                     maxLines: null,
                     validator: (desc){

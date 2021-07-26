@@ -15,7 +15,7 @@ class SizeWidget extends StatelessWidget {
     final selected = size == product.select;
 
     Color color;
-    if(!(size.stock > 0)){
+    if(!(size.stock! > 0)){
       color = Colors.red.withAlpha(50);
     } else if(selected){
       color = Theme.of(context).primaryColor;
@@ -25,7 +25,7 @@ class SizeWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        if((size.stock > 0)){
+        if((size.stock! > 0)){
           product.selectSize = size;
         }
       },
@@ -42,7 +42,7 @@ class SizeWidget extends StatelessWidget {
               color: color,
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               child: Text(
-                size.name.toUpperCase(),
+                size.name!.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -51,7 +51,7 @@ class SizeWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                "R\$ ${size.price.toStringAsFixed(2)}",
+                "R\$ ${size.price!.toStringAsFixed(2)}",
                 style: TextStyle(
                   color: color
                 ),

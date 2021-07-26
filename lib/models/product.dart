@@ -46,7 +46,7 @@ class Product extends ChangeNotifier {
   int get totalStock{
     int stock = 0;
     for(final size in sizes!){
-      stock += size.stock;
+      stock += size.stock!;
     }
     return stock;
   }
@@ -58,8 +58,8 @@ class Product extends ChangeNotifier {
   num get basePrice{
     num lowest = double.infinity;
     for(final size in sizes!){
-      if(size.price < lowest && (size.stock != 0))
-        lowest = size.price;
+      if(size.price! < lowest && (size.stock != 0))
+        lowest = size.price!;
     }
     return lowest;
   }
