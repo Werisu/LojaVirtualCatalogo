@@ -23,6 +23,12 @@ class EditItemSize extends StatelessWidget {
               labelText: 'Título',
               isDense: true,
             ),
+            validator: (name){
+              if(name!.isEmpty)
+                return "Inválido";
+              return null;
+            },
+            onChanged: (name) => size!.name = name,
           ),
         ),
         SizedBox(width: 4,),
@@ -34,6 +40,12 @@ class EditItemSize extends StatelessWidget {
               labelText: 'Estoque',
               isDense: true,
             ),
+            validator: (stock){
+              if(int.tryParse(stock!) == null)
+                return "Inválido";
+              return null;
+            },
+            onChanged: (stock) => size!.stock = int.tryParse(stock),
             keyboardType: TextInputType.number,
           ),
         ),
@@ -45,8 +57,15 @@ class EditItemSize extends StatelessWidget {
               decoration: const InputDecoration(
                 labelText: 'Preço',
                 isDense: true,
-                prefixText: 'R\$'
+                prefixText: 'R\$',
               ),
+            textCapitalization: TextCapitalization.sentences,
+            validator: (price){
+              if(num.tryParse(price!) == null)
+                return "Inválido";
+              return null;
+            },
+            onChanged: (price) => size!.price = num.tryParse(price),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
           ),
         ),
