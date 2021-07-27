@@ -18,7 +18,7 @@ class EditItemSize extends StatelessWidget {
         Expanded(
           flex: 30,
           child: TextFormField(
-            initialValue: size!.name!.toUpperCase(),
+            initialValue: size!.name,
             decoration: const InputDecoration(
               labelText: 'Título',
               isDense: true,

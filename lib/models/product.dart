@@ -24,6 +24,8 @@ class Product extends ChangeNotifier {
   late List<String>? images;
   late List<ItemSize>? sizes;
 
+  List<dynamic>? newImages;
+
   ItemSize? _selectSize;
   ItemSize? get select {
     try {
@@ -85,5 +87,10 @@ class Product extends ChangeNotifier {
       images: List.from(images as List<dynamic>),
       sizes: sizes!.map((size) => size.clone()).toList()
     );
+  }
+
+  @override
+  String toString() {
+    return 'Product{id: $id, name: $name, description: $description, images: $images, sizes: $sizes, newImages: $newImages}';
   }
 }

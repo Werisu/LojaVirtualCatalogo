@@ -45,6 +45,7 @@ class EditProductScreen extends StatelessWidget {
                         return null;
                       }
                     },
+                    onSaved: (name) => product.name = name,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
@@ -83,6 +84,7 @@ class EditProductScreen extends StatelessWidget {
                       if (desc!.length < 10) return "Descrição muito curta";
                       return null;
                     },
+                    onSaved: (desc) => product.description = desc,
                   ),
                   SizesForm(product),
                   const SizedBox(
@@ -93,6 +95,9 @@ class EditProductScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
+                          formkey.currentState!.save();
+
+                          print(product);
                           print("Válido");
                         } else {
                           print("inválido");
