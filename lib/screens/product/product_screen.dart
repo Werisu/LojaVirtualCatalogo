@@ -20,7 +20,7 @@ class ProductScreen extends StatelessWidget {
       value: product,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(product.name),
+          title: Text(product.name!),
           centerTitle: true,
           actions: [
             Consumer<UserManager>(
@@ -48,7 +48,7 @@ class ProductScreen extends StatelessWidget {
             AspectRatio(
               aspectRatio: 1,
               child: Carousel(
-                images: product.images.map((url){
+                images: product.images!.map((url){
                   return NetworkImage(url);
                 }).toList(),
                 dotSize: 4,
@@ -64,7 +64,7 @@ class ProductScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    product.name,
+                    product.name!,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600
@@ -99,7 +99,7 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product.description,
+                    product.description!,
                     style: TextStyle(
                       fontSize: 16
                     ),

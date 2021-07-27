@@ -1,5 +1,6 @@
 import 'package:catalogoapp/common/custom_drawer/custom_drawer.dart';
 import 'package:catalogoapp/models/product-manager.dart';
+import 'package:catalogoapp/models/user_manager.dart';
 import 'package:catalogoapp/screens/products/components/product_list_tile.dart';
 import 'package:catalogoapp/screens/products/components/search_dialog.dart';
 import 'package:flutter/material.dart';
@@ -15,16 +16,15 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Consumer<ProductManager>(
-            builder: (_, productManager, __){
-              if(productManager.search.isEmpty){
+            builder: (_, productManager, __) {
+              if (productManager.search.isEmpty) {
                 return IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: () async{
+                  onPressed: () async {
                     final search = await showDialog<String>(
                         context: context,
-                        builder: (_)=>SearchDialog(productManager.search)
-                    );
-                    if(search != ""){
+                        builder: (_) => SearchDialog(productManager.search));
+                    if (search != "") {
                       productManager.search = search!;
                     }
                   },
@@ -32,50 +32,65 @@ class ProductsScreen extends StatelessWidget {
               } else {
                 return IconButton(
                   icon: Icon(Icons.close),
-                  onPressed: () async{
-                      productManager.search = "";
+                  onPressed: () async {
+                    productManager.search = "";
                   },
                 );
+              }
+            },
+          ),
+          Consumer<UserManager>(
+            builder: (_, userManager, __) {
+              if (userManager.adminEnabled) {
+                return IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/edit_product',
+                    );
+                  },
+                );
+              } else {
+                return Container();
               }
             },
           )
         ],
         title: Consumer<ProductManager>(
-          builder: (_, productManager, __){
-            if(productManager.search.isEmpty){
+          builder: (_, productManager, __) {
+            if (productManager.search.isEmpty) {
               return const Text("Produtos");
             } else {
-              return LayoutBuilder(
-                  builder: (_, constraints){
-                    return GestureDetector(
-                      onTap: () async{
-                        final search = await showDialog(
-                            context: context,
-                            builder: (_)=>SearchDialog(productManager.search)
-                        );
-                        if(search != ""){
-                          productManager.search = search;
-                        }
-                      },
-                      child: Container(
-                        width: constraints.biggest.width,
-                          child: Text(productManager.search, textAlign: TextAlign.center,)
-                      ),
-                    );
-                  }
-              );
+              return LayoutBuilder(builder: (_, constraints) {
+                return GestureDetector(
+                  onTap: () async {
+                    final search = await showDialog(
+                        context: context,
+                        builder: (_) => SearchDialog(productManager.search));
+                    if (search != "") {
+                      productManager.search = search;
+                    }
+                  },
+                  child: Container(
+                      width: constraints.biggest.width,
+                      child: Text(
+                        productManager.search,
+                        textAlign: TextAlign.center,
+                      )),
+                );
+              });
             }
           },
         ),
         centerTitle: true,
       ),
       body: Consumer<ProductManager>(
-        builder: (_, productManager, __){
+        builder: (_, productManager, __) {
           final filteredProducts = productManager.filteredProducts;
           return ListView.builder(
             padding: const EdgeInsets.all(4),
             itemCount: filteredProducts.length,
-            itemBuilder: (_, index){
+            itemBuilder: (_, index) {
               return ProductListTile(filteredProducts[index]);
             },
           );
@@ -84,7 +99,7 @@ class ProductsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         foregroundColor: Theme.of(context).primaryColor,
-        onPressed: (){
+        onPressed: () {
           Navigator.of(context).pushNamed('/cart');
         },
         child: Icon(Icons.shopping_cart),

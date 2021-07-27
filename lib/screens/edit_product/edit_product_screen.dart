@@ -2,14 +2,16 @@ import 'package:catalogoapp/models/product.dart';
 import 'package:catalogoapp/screens/edit_product/components/images_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'components/sizes_form.dart';
 
 class EditProductScreen extends StatelessWidget {
-  EditProductScreen(this.product);
+  EditProductScreen(Product? p) :
+      editing = p != null,
+        product = p != null ? p.clone() : Product();
 
   final Product product;
+  final  bool editing;
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -18,9 +20,7 @@ class EditProductScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          "Editar Produto"
-        ),
+        title: Text(editing ? "Editar Produto" : "Novo Produto"),
         centerTitle: true,
       ),
       body: Form(
@@ -36,17 +36,12 @@ class EditProductScreen extends StatelessWidget {
                   TextFormField(
                     initialValue: product.name,
                     decoration: InputDecoration(
-                        hintText: 'Título',
-                        border: InputBorder.none
-                    ),
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600
-                    ),
-                    validator: (name){
-                      if(name!.length < 6){
+                        hintText: 'Título', border: InputBorder.none),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    validator: (name) {
+                      if (name!.length < 6) {
                         return "Título muito curto";
-                      }else{
+                      } else {
                         return null;
                       }
                     },
@@ -55,10 +50,7 @@ class EditProductScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       'A partir de',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 13
-                      ),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 13),
                     ),
                   ),
                   Padding(
@@ -66,50 +58,50 @@ class EditProductScreen extends StatelessWidget {
                     child: Text(
                       'R\$ ...',
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor
-                      ),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
                       'Descrição',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      ),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                   TextFormField(
                     initialValue: product.description,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                     decoration: const InputDecoration(
-                        hintText: "Descrição",
-                        border: InputBorder.none,
+                      hintText: "Descrição",
+                      border: InputBorder.none,
                     ),
                     maxLines: null,
-                    validator: (desc){
-                      if(desc!.length < 10)
-                        return "Descrição muito curta";
+                    validator: (desc) {
+                      if (desc!.length < 10) return "Descrição muito curta";
                       return null;
                     },
                   ),
                   SizesForm(product),
-                  ElevatedButton(
-                    onPressed: (){
-                      if(formkey.currentState!.validate()){
-                        print("Válido");
-                      }else{
-                        print("inválido");
-                      }
-                    },
-                    child: const Text("Salvar"),
-                    style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 44,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          print("Válido");
+                        } else {
+                          print("inválido");
+                        }
+                      },
+                      child: const Text("Salvar"),
+                      style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).primaryColor,
+                          textStyle: TextStyle(fontSize: 18)),
                     ),
                   )
                 ],
