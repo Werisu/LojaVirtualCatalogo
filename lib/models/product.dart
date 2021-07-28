@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:catalogoapp/models/item_size.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:uuid/uuid.dart';
 
 class Product extends ChangeNotifier {
   Product({this.name, this.description, this.id, this.images, this.sizes}){
@@ -25,6 +29,13 @@ class Product extends ChangeNotifier {
   late List<ItemSize>? sizes;
 
   List<dynamic>? newImages;
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  DocumentReference get firestoreRef => firestore.doc('products/$id');
+
+  Reference get storageRef => storage.ref().child('products').child(id!);
 
   ItemSize? _selectSize;
   ItemSize? get select {
@@ -76,6 +87,38 @@ class Product extends ChangeNotifier {
       return sizes!.firstWhere((s) => s.name == name);
     } catch (e) {
       return null;
+    }
+  }
+
+  List<Map<String, dynamic>> exportSizeList(){
+    return sizes!.map((size) => size.toMap()).toList();
+  }
+
+  Future<void> save() async{
+    final Map<String, dynamic> data = {
+      'name': name,
+      'description': description,
+      'sizes': exportSizeList(),
+    };
+
+    if(id == null){
+      final doc = await firestore.collection('products').add(data);
+      id = doc.id;
+    }else{
+      await firestoreRef.update(data);
+    }
+
+    final List<String> updateImages = [];
+
+    for(final newImage in newImages!){
+      if(images!.contains(newImage)){
+        updateImages.add(newImage as String);
+      } else {
+        final UploadTask task = storageRef.child(Uuid().v1()).putFile(newImage as File); //fazendo o upload
+        final TaskSnapshot snapshot = await task; // esperando o upload completar
+        final String url = snapshot.ref.getDownloadURL() as String; // pegando a url do upload
+        updateImages.add(url); // adicionando o url no banco de dados
+      }
     }
   }
 
