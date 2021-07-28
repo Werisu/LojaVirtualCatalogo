@@ -30,6 +30,13 @@ class Product extends ChangeNotifier {
 
   List<dynamic>? newImages;
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value){
+    _loading = value;
+    notifyListeners();
+  }
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -95,6 +102,7 @@ class Product extends ChangeNotifier {
   }
 
   Future<void> save() async{
+    loading = true;
     final Map<String, dynamic> data = {
       'name': name,
       'description': description,
@@ -116,10 +124,27 @@ class Product extends ChangeNotifier {
       } else {
         final UploadTask task = storageRef.child(Uuid().v1()).putFile(newImage as File); //fazendo o upload
         final TaskSnapshot snapshot = await task; // esperando o upload completar
-        final String url = snapshot.ref.getDownloadURL() as String; // pegando a url do upload
+        final String url = await snapshot.ref.getDownloadURL() as String; // pegando a url do upload
         updateImages.add(url); // adicionando o url no banco de dados
       }
     }
+
+    for (final image in images!){
+      if(!newImages!.contains(image)){
+        try{
+          final ref = storage.refFromURL(image); // buscando images no storage
+          await ref.delete();
+        }catch(e){
+          debugPrint('Falha ao deletar $image');
+        }
+      }
+    }
+
+    await firestoreRef.update({'images': updateImages});
+
+    images = updateImages;
+
+    loading = false;
   }
 
   Product clone(){
