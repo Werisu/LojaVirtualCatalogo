@@ -21,9 +21,9 @@ class SectionStaggered extends StatelessWidget {
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             crossAxisCount: 4,
-            itemCount: section.items.length,
+            itemCount: section.items!.length,
             itemBuilder: (_, index){
-              return ItemTile(section.items[index]);
+              return ItemTile(section.items![index]);
             },
             staggeredTileBuilder: (index) =>
               StaggeredTile.count(2, index.isEven ? 2 : 1),

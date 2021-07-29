@@ -13,7 +13,7 @@ class SectionHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
-        StringUtils.capitalize(section.name),
+        StringUtils.capitalize(section.name ?? " "),
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w800,

@@ -8,7 +8,12 @@ class HomeManager extends ChangeNotifier{
     _loadSections();
   }
 
-  List<Section> sections = [];
+  List<Section> _sections = [];
+
+  /// clonando
+  List<Section> _editingSections = [];
+
+  bool editing = false;
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -16,12 +21,43 @@ class HomeManager extends ChangeNotifier{
     // modificação na tela do gerente aparecerá instataneamente na tela
     // do cliente
     firestore.collection('home').snapshots().listen((snapshot) {
-      sections.clear();
+      _sections.clear();
       for(final DocumentSnapshot document in snapshot.docs){
-        sections.add(Section.fromDocument(document));
+        _sections.add(Section.fromDocument(document));
       }
       notifyListeners();
     });
+  }
+
+  void addSection(Section section){
+    _editingSections.add(section);
+    notifyListeners();
+  }
+
+  List<Section> get sections{
+    if(editing){
+      return _editingSections;
+    }else{
+      return _sections;
+    }
+  }
+
+  void enterEditing(){
+    editing = true;
+
+    _editingSections = _sections.map((s) => s.clone()).toList();
+
+    notifyListeners();
+  }
+
+  void saveEditing(){
+    editing = false;
+    notifyListeners();
+  }
+
+  void discardEditing(){
+    editing = false;
+    notifyListeners();
   }
 
 }

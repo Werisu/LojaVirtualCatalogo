@@ -21,10 +21,10 @@ class SectionList extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index){
-                return ItemTile(section.items[index]);
+                return ItemTile(section.items![index]);
               },
               separatorBuilder: (_, __) => SizedBox(width: 4,),
-              itemCount: section.items.length,
+              itemCount: section.items!.length,
             ),
           )
         ],
