@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:catalogoapp/models/product-manager.dart';
 import 'package:catalogoapp/models/section_item.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class ItemTile extends StatelessWidget {
       onTap: (){
         if(item.product != ""){
           final product = context.read<ProductManager>()
-              .findProductByID(item.product);
+              .findProductByID(item.product!);
           if(product != null){
             Navigator.of(context).pushNamed('/product', arguments: product);
           }
@@ -23,11 +25,13 @@ class ItemTile extends StatelessWidget {
       },
       child: AspectRatio(
         aspectRatio: 1,
-        child: FadeInImage.memoryNetwork(
+        child: item.image is String ?
+        FadeInImage.memoryNetwork(
           placeholder: kTransparentImage,
           image: item.image,
           fit: BoxFit.cover,
         )
+        : Image.file(item.image as File, fit: BoxFit.cover,),
       ),
     );
   }

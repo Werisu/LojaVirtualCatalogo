@@ -16,27 +16,34 @@ class SectionList extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeManager = context.watch<HomeManager>();
 
-    return Container(
-      margin: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SectionHeader(section),
-          SizedBox(
-            height: 150,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, index){
-                if(index < section.items!.length)
-                  return ItemTile(section.items![index]);
-                else
-                  return AddTileWidget();
-              },
-              separatorBuilder: (_, __) => SizedBox(width: 4,),
-              itemCount: homeManager.editing ? section.items!.length +1 : section.items!.length,
-            ),
-          )
-        ],
+    return ChangeNotifierProvider.value(
+      value: section,
+      child: Container(
+        margin: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SectionHeader(),
+            SizedBox(
+              height: 150,
+              child: Consumer<Section>(
+                builder: (_, section, __){
+                  return ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index){
+                      if(index < section.items!.length)
+                        return ItemTile(section.items![index]);
+                      else
+                        return AddTileWidget();
+                    },
+                    separatorBuilder: (_, __) => SizedBox(width: 4,),
+                    itemCount: homeManager.editing ? section.items!.length +1 : section.items!.length,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
