@@ -9,6 +9,7 @@ import 'package:catalogoapp/screens/cart/cart_screen.dart';
 import 'package:catalogoapp/screens/edit_product/edit_product_screen.dart';
 import 'package:catalogoapp/screens/login/login_screen.dart';
 import 'package:catalogoapp/screens/product/product_screen.dart';
+import 'package:catalogoapp/screens/select_product/select_product_screen.dart';
 import 'package:catalogoapp/screens/signup/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -71,30 +72,41 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_)=>BaseScreen(),
               );
+
             case '/login':
               return MaterialPageRoute(
                 builder: (_)=>LoginScreen(),
               );
+
             case '/signup':
               return MaterialPageRoute(
                 builder: (_)=>SignUpScreen(),
               );
+
             case '/product':
               return MaterialPageRoute(
                 builder: (_)=>ProductScreen(
                   settings.arguments as Product
                 )
               );
+
             case '/cart':
               return MaterialPageRoute(
                   builder: (_)=>CartScreen()
               );
+
             case '/edit_product':
               return MaterialPageRoute(
                 builder: (_) => EditProductScreen(
                   settings.arguments as Product
                 )
               );
+
+            case '/select_product':
+              return MaterialPageRoute(
+                builder: (_)=>SelectProductScreen(),
+              );
+
             default:
               return MaterialPageRoute(
                 builder: (_)=>BaseScreen(),
