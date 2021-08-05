@@ -14,31 +14,46 @@ class SectionHeader extends StatelessWidget {
 
     if(homeManager.editing){
 
-      return Row(
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: TextFormField(
-              initialValue: section.name,
-              decoration: const InputDecoration(
-                hintText: "Título",
-                isDense: true,
-                border: InputBorder.none,
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  initialValue: section.name,
+                  decoration: const InputDecoration(
+                    hintText: "Título",
+                    isDense: true,
+                    border: InputBorder.none,
+                  ),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18
+                  ),
+                  onChanged: (text) => section.name = text,
+                ),
               ),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18
+              CustomIconButton(
+                iconData: Icons.remove,
+                color: Colors.white,
+                onTap: (){
+                  homeManager.removeSection(section);
+                },
               ),
-              onChanged: (text) => section.name = text,
-            ),
+            ],
           ),
-          CustomIconButton(
-            iconData: Icons.remove,
-            color: Colors.white,
-            onTap: (){
-              homeManager.removeSection(section);
-            },
-          ),
+          if(section.error != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                section.error!,
+                style: TextStyle(
+                  color: Colors.red
+                ),
+              ),
+            )
         ],
       );
 
