@@ -29,13 +29,6 @@ class Section extends ChangeNotifier {
   // save
   List<SectionItem>? originalItems;
 
-  bool _loading = false;
-  bool get loading => _loading;
-  set loading(bool value){
-    _loading = value;
-    notifyListeners();
-  }
-
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -59,11 +52,11 @@ class Section extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> save() async{
-    loading = true;
+  Future<void> save(int pos) async{
     final Map<String, dynamic> data = {
       'name' : name,
       'type' : type,
+      'pos' : pos,
     };
 
     if(id == null){
@@ -101,8 +94,18 @@ class Section extends ChangeNotifier {
     };
     
     await firestoreRef.update(itemsData);
+  }
 
-    loading = false;
+  Future<void> delete() async{
+    await firestoreRef.delete();
+    for(final item in items!){
+      try{
+        final ref = await storage.refFromURL(
+            item.image as String
+        );
+        await ref.delete();
+      }catch(e){}
+    }
   }
 
   bool valid(){

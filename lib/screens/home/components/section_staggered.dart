@@ -39,7 +39,7 @@ class SectionStaggered extends StatelessWidget {
                       return AddTileWidget();
                   },
                   staggeredTileBuilder: (index) =>
-                      StaggeredTile.count(2, index.isEven ? 2 : 1),
+                      StaggeredTile.count(2, index.isEven ? 3 : 2),
                   mainAxisSpacing: 4,
                   crossAxisSpacing: 4,
                 );
