@@ -14,46 +14,31 @@ class SectionHeader extends StatelessWidget {
 
     if(homeManager.editing){
 
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      return Row(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  initialValue: section.name,
-                  decoration: const InputDecoration(
-                    hintText: "Título",
-                    isDense: true,
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 18
-                  ),
-                  onChanged: (text) => section.name = text,
-                ),
+          Expanded(
+            child: TextFormField(
+              initialValue: section.name,
+              decoration: const InputDecoration(
+                hintText: "Título",
+                isDense: true,
+                border: InputBorder.none,
               ),
-              CustomIconButton(
-                iconData: Icons.remove,
-                color: Colors.white,
-                onTap: (){
-                  homeManager.removeSection(section);
-                },
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18
               ),
-            ],
+              onChanged: (text) => section.name = text,
+            ),
           ),
-          if(section.error != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                section.error!,
-                style: TextStyle(
-                  color: Colors.red
-                ),
-              ),
-            )
+          CustomIconButton(
+            iconData: Icons.remove,
+            color: Colors.white,
+            onTap: (){
+              homeManager.removeSection(section);
+            },
+          ),
         ],
       );
 
